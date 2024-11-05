@@ -1,14 +1,14 @@
 databaseChangeLog:
   - changeSet:
-    id: 1
-    author: Tester
-    changes:
-      - createTable:
-        tableName: second_table
-        columns:
-          - column:
-              name: id
-              type: int
-              autoIncrement: true
-              constraints:
-                primaryKey: true
+      id: 1
+      author: Tester
+      changes:
+        - createTable:
+          tableName: second_table
+          columns:
+            - column:
+                name: id
+                type: int
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
