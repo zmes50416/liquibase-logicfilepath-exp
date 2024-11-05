@@ -34,7 +34,7 @@ jobs:
         run: |
           liquibase \
             --changeLogFile=changelog-master.yaml \
-            --searchPath=app
+            --search-path=app
             --url="jdbc:mariadb://db:3306/app?createDatabaseIfNotExist=true" \
             --username=root \
             --password=password \
