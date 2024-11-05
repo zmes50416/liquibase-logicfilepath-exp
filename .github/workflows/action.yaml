@@ -17,11 +17,13 @@ jobs:
     strategy:
       matrix:
         liquibase-version:
+          - "liquibase/liquibase:4.23"
+          - "liquibase/liquibase:4.24"
           - "liquibase/liquibase:4.25"
-          # - "liquibase/liquibase:4.26"
-          # - "liquibase:4.27"
-          # - "liquibase:4.28"
-          # - "liquibase:4.29"
+          - "liquibase/liquibase:4.26"
+          - "liquibase:4.27"
+          - "liquibase:4.28"
+          - "liquibase:4.29"
     container:
       image: ${{ matrix.liquibase-version }}
     steps:
@@ -32,7 +34,7 @@ jobs:
         run: |
           liquibase \
             --changeLogFile=app/changelog-master.yaml \
-            --url="jdbc:mariadb://db:3306/app" \
+            --url="jdbc:mariadb://db:3306/app?createDatabaseIfNotExist=true" \
             --username=root \
             --password=password \
             status

@@ -4,11 +4,11 @@ databaseChangeLog:
       author: Tester
       changes:
         - createTable:
-          tableName: second_table
-          columns:
-            - column:
-                name: id
-                type: int
-                autoIncrement: true
-                constraints:
-                  primaryKey: true
+            tableName: second_table
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
