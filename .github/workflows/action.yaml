@@ -8,8 +8,7 @@ jobs:
     services:
       db:
         image: mariadb
-        options:
-          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -33,7 +32,7 @@ jobs:
         run: |
           liquibase \
             --changeLogFile=app/changelog-master.yaml \
-            --url="jdbc:mariadb://localhost:3306/app" \
+            --url="jdbc:mariadb://db:3306/app" \
             --username=root \
             --password=password \
             status
