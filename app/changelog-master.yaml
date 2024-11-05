@@ -2,6 +2,7 @@ databaseChangeLog:
   - logicalFilePath: MyApp
   - changeSet:
       id: 1
+      author: Tester
       changes:
         - createTable:
             tableName: first_table
@@ -13,5 +14,5 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
   - includeAll:
-      relativeToChangelogFile: true
+      logicalFilePath: MyApp
       path: ./changelogs
