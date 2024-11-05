@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - logicalFilePath: MyApp
+  - changeSet:
+    id: 1
+    changes:
+      - createTable:
+        tableName: first_table
+        columns:
+          - column:
+              name: id
+              type: int
+              autoIncrement: true
+              constraints:
+                primaryKey: true
+  - includeAll:
+      relativeToChangelogFile: true
+      path: ./changelogs

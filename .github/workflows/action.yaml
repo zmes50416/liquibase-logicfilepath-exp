@@ -1,0 +1,44 @@
+name: Test changelog files
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mariadb
+        env:
+          MARIADB_ROOT_PASSWORD: password
+    strategy:
+      matrix:
+        liquibase-version:
+          - "4.25"
+          # - "4.26"
+          # - "4.27"
+          # - "4.28"
+          # - "4.29"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up image name
+        id: setup_image
+        run: |
+          npm install -g semver
+          if semver -r ">4.27" "${{ matrix.liquibase-version }}"; then
+            echo "name=liquibase" >> $GITHUB_OUTPUT
+          else
+            echo name=liquibase/liquibase" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verify changelog
+        run: |
+          docker run --rm \
+          -v ${{ github.workspace }}:/liquibase/changelog \
+          ${{ steps.setup_image.outputs.name }}:${{ matrix.liquibase-version }} \
+          --changeLogFile=/liquibase/changelog/app/changelog-master.yaml \
+          --url="jdbc:mariadb://db:3306" \
+          --username=root \
+          --password=password \
+          validate
