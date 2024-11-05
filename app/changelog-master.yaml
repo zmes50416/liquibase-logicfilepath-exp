@@ -14,5 +14,6 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
   - includeAll:
+      relativeToChangelogFile: true
       logicalFilePath: MyApp
       path: ./changelogs
