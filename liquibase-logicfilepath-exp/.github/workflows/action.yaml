@@ -1,0 +1,39 @@
+name: Test changelog files
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: mariadb
+        options: --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        env:
+          MARIADB_ROOT_PASSWORD: password
+    strategy:
+      matrix:
+        liquibase-version:
+          - "liquibase/liquibase:4.25"
+          - "liquibase/liquibase:4.26"
+          - "liquibase:4.27"
+          - "liquibase:4.28"
+          - "liquibase:4.29"
+          - "liquibase:4.30"
+    container:
+      image: ${{ matrix.liquibase-version }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify changelog
+        run: |
+          liquibase \
+            --changeLogFile=app/changelog-master.yaml \
+            --url="jdbc:mariadb://db:3306/app?createDatabaseIfNotExist=true" \
+            --username=root \
+            --password=password \
+            status
