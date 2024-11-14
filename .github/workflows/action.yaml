@@ -24,6 +24,7 @@ jobs:
           - "liquibase:4.27"
           - "liquibase:4.28"
           - "liquibase:4.29"
+          - "liquibase:4.30"
     container:
       image: ${{ matrix.liquibase-version }}
     steps:
