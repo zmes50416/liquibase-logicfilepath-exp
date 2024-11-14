@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Tester
       changes:
         - createTable:
-            tableName: first_table
+            tableName: third_table
             columns:
               - column:
                   name: id
@@ -12,7 +12,3 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-  - includeAll:
-      relativeToChangelogFile: true
-      logicalFilePath: MyApp
-      path: ./changelogs
