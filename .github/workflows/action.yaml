@@ -15,6 +15,7 @@ jobs:
         env:
           MARIADB_ROOT_PASSWORD: password
     strategy:
+      fail-fast: false
       matrix:
         liquibase-version:
           - "liquibase/liquibase:4.23"
