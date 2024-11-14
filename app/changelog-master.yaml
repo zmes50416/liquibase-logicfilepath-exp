@@ -1,5 +1,4 @@
 databaseChangeLog:
-  - logicalFilePath: MyApp
   - changeSet:
       id: 1
       author: Tester
